@@ -8,239 +8,154 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#0e1729; --ink-2:#172238; --ink-3:#22304d;
-    --surface:#ffffff; --panel:#f5f7fb; --panel-2:#eef1f8; --border:#dde3ee;
-    --text:#16202e; --muted:#5d6b7e;
-    --teal:#0d9488; --teal-d:#0b7d72; --teal-soft:#e2f5f1;
-    --amber:#b96909; --amber-soft:#fbf0db;
-    --emerald:#0c8f5a; --emerald-soft:#e6f6ed; --emerald-bd:#bce6cf;
-    --violet:#6d4ad1; --violet-soft:#efeafc;
-    --code-cy:#7fdbe4; --code-gn:#9be8b6; --code-am:#f2c879; --code-mu:#8aa0bc;
-    --maxw:880px;
-    --radius:14px;
-  }
+
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-  body{
-    margin:0; background:var(--surface); color:var(--text);
-    font-family:"Inter",system-ui,sans-serif; font-size:16.5px; line-height:1.68;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--teal-d); text-decoration:none; border-bottom:1px solid #bfe1db}
-  a:hover{color:var(--teal); border-color:var(--teal)}
-  h1,h2,h3,h4{font-family:"Space Grotesk",sans-serif; line-height:1.18; color:var(--ink); font-weight:600}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+  body{margin:0;background:#fff;color:#1f2733;font-family:"Inter",system-ui,sans-serif;font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:#1d54c4;text-decoration:none;border-bottom:1px solid #c5d6f7}
+  a:hover{border-color:#1d54c4}
+  h1,h2,h3,h4{font-family:"Space Grotesk",sans-serif;line-height:1.25;color:#16202c;font-weight:600}
   code,kbd,pre{font-family:"JetBrains Mono",ui-monospace,monospace}
 
-  /* ---------- top console bar ---------- */
-  .topbar{
-    background:var(--ink); color:#cfe0f2; border-bottom:1px solid #000;
-    font-family:"JetBrains Mono",monospace; font-size:12.5px; letter-spacing:.02em;
-    display:flex; align-items:center; gap:10px; padding:9px 18px;
-  }
-  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
-  .dot.r{background:#ff5f56}.dot.y{background:#ffbd2e}.dot.g{background:#27c93f}
-  .topbar .path{color:#7f93ad;margin-left:6px}
-  .topbar .blink{margin-left:auto;color:var(--code-gn)}
+  /* sticky header */
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    background:#fff;border-bottom:1px solid #e3e8ef;padding:12px 22px}
+  .topbar .brand{font-family:"Space Grotesk",sans-serif;font-weight:600;color:#16202c;font-size:15px}
+  .topbar .ver{color:#7a8694;font-size:13px}
 
-  /* ---------- hero ---------- */
-  .hero{
-    background:
-      radial-gradient(900px 380px at 88% -10%, rgba(13,148,136,.20), transparent 60%),
-      radial-gradient(700px 320px at 0% 120%, rgba(109,74,209,.16), transparent 55%),
-      var(--ink);
-    color:#eaf1fb; padding:66px 24px 58px;
-  }
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 8px}
-  .eyebrow{
-    font-family:"JetBrains Mono",monospace; font-size:12.5px; letter-spacing:.22em;
-    text-transform:uppercase; color:var(--code-cy); margin:0 0 18px;
-  }
-  .hero h1{
-    color:#fff; font-size:clamp(34px,5.4vw,56px); font-weight:700; margin:0 0 18px; letter-spacing:-.015em;
-  }
-  .hero h1 .em{
-    background:linear-gradient(90deg,#2fd3c4,#7fdbe4);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .hero p.lede{font-size:18.5px; color:#bcccdf; max-width:660px; margin:0 0 8px}
-  .hero .meta{
-    font-family:"JetBrains Mono",monospace; font-size:12.5px; color:#7f93ad;
-    margin-top:26px; display:flex; flex-wrap:wrap; gap:8px 18px;
-  }
-  .hero .meta b{color:var(--code-gn); font-weight:500}
+  /* hero */
+  .hero{background:#f7f9fc;border-bottom:1px solid #e8edf4;padding:46px 22px 40px}
+  .wrap{max-width:880px;margin:0 auto}
+  .hero h1{font-size:clamp(30px,4.6vw,42px);margin:0 0 14px;letter-spacing:-.01em}
+  .hero .lede{font-size:18px;color:#46535f;max-width:680px;margin:0}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .hero .meta span{background:#fff;border:1px solid #e3e8ef;border-radius:999px;padding:5px 13px;font-size:13px;color:#46535f}
+  .hero .meta b{color:#16202c;font-weight:600}
 
-  /* ---------- bridge / thesis table ---------- */
-  .bridge{max-width:var(--maxw); margin:-34px auto 0; padding:0 16px; position:relative; z-index:2}
-  .bridge-card{
-    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-    box-shadow:0 22px 50px -28px rgba(14,23,41,.45); overflow:hidden;
-  }
-  .bridge-head{
-    padding:16px 22px; border-bottom:1px solid var(--border); background:var(--panel);
-    font-family:"JetBrains Mono",monospace; font-size:12.5px; letter-spacing:.04em; color:var(--muted);
-  }
-  .bridge-head b{color:var(--ink)}
-  .maprow{display:grid; grid-template-columns:1fr 30px 1fr; align-items:center; gap:8px;
-    padding:13px 22px; border-bottom:1px solid var(--panel-2)}
-  .maprow:last-child{border-bottom:0}
-  .maprow .you{font-weight:600; color:var(--ink)}
-  .maprow .arrow{color:var(--teal); font-family:"JetBrains Mono",monospace; text-align:center}
-  .maprow .learn{color:var(--muted)}
-  .maprow .learn b{color:var(--teal-d)}
+  /* layout */
+  .shell{max-width:1180px;margin:34px auto 0;padding:0 22px;display:grid;grid-template-columns:226px 1fr;gap:46px;align-items:start}
+  nav.toc{position:sticky;top:70px;font-size:14px}
+  nav.toc .tt{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8a96a3;margin:0 0 12px;font-weight:600}
+  nav.toc ol{list-style:none;margin:0;padding:0;border-left:2px solid #e6eaf1}
+  nav.toc li a{display:block;padding:7px 0 7px 16px;margin-left:-2px;color:#66727f;border-left:2px solid transparent;border-bottom:0;font-weight:500}
+  nav.toc li a:hover{color:#16202c}
+  nav.toc li a.active{color:#1d54c4;border-left-color:#2f6feb}
+  main{min-width:0;max-width:880px}
 
-  /* ---------- layout ---------- */
-  .shell{max-width:1200px; margin:34px auto 0; padding:0 24px; display:grid;
-    grid-template-columns:236px 1fr; gap:42px; align-items:start}
-  nav.toc{position:sticky; top:20px; align-self:start; font-size:14px}
-  nav.toc .tt{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.18em;
-    text-transform:uppercase; color:var(--muted); margin:0 0 12px}
-  nav.toc ol{list-style:none; margin:0; padding:0; border-left:2px solid var(--border)}
-  nav.toc li a{display:block; padding:7px 0 7px 16px; margin-left:-2px; color:var(--muted);
-    border-left:2px solid transparent; border-bottom:0; font-weight:500}
-  nav.toc li a:hover{color:var(--ink)}
-  nav.toc li a.active{color:var(--teal-d); border-left-color:var(--teal)}
-  main{min-width:0; max-width:var(--maxw)}
-
-  /* ---------- modules & prose ---------- */
-  .module{padding:14px 0 30px; border-top:1px solid var(--border); margin-top:30px}
-  .module:first-of-type{border-top:0; margin-top:0}
-  .mlabel{font-family:"JetBrains Mono",monospace; font-size:12.5px; letter-spacing:.14em;
-    text-transform:uppercase; color:var(--teal-d); font-weight:600; margin:0 0 6px}
-  .module h2{font-size:28px; margin:0 0 6px; letter-spacing:-.01em}
-  .module > p{color:#33414f}
-  main h3{font-size:19px; margin:28px 0 8px}
+  /* modules + prose */
+  .module{padding:32px 0;border-top:1px solid #e8edf4}
+  .module:first-of-type{border-top:0;padding-top:34px}
+  .mlabel{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:#2f6feb;font-weight:600;margin:0 0 6px}
+  .module h2{font-size:27px;margin:0 0 10px;letter-spacing:-.01em}
+  main h3{font-size:18.5px;margin:26px 0 8px}
   main p{margin:12px 0}
-  main ul,main ol{margin:12px 0; padding-left:22px}
+  main ul,main ol{margin:12px 0;padding-left:22px}
   main li{margin:6px 0}
-  main strong{color:var(--ink)}
-
-  /* inline code */
-  p code,li code,td code,summary code{background:var(--panel-2); border:1px solid var(--border);
-    padding:1px 6px; border-radius:6px; font-size:.86em; color:#0c5f57}
+  main strong{color:#16202c}
+  p code,li code,td code,summary code{background:#eef1f6;border:1px solid #e0e5ec;padding:1px 6px;border-radius:5px;font-size:.86em;color:#1d54c4}
 
   /* code blocks */
-  pre{background:var(--ink); color:#dce6f2; border-radius:12px; padding:16px 18px;
-    overflow:auto; font-size:13.5px; line-height:1.6; margin:14px 0; border:1px solid #000}
-  pre .c{color:var(--code-mu)}      /* comment */
-  pre .k{color:var(--code-cy)}      /* key/keyword */
-  pre .s{color:var(--code-gn)}      /* string/value */
-  pre .v{color:var(--code-am)}      /* variable/flag */
-  pre .p{color:#c7b3ff}             /* path/special */
-  .codecap{font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--muted);
-    margin:16px 0 -8px; letter-spacing:.02em}
-  .codecap::before{content:"› "; color:var(--teal)}
+  pre{background:#11161f;color:#dbe4ef;border-radius:10px;padding:15px 17px;overflow:auto;font-size:13.5px;line-height:1.6;margin:12px 0}
+  pre .c{color:#7f8ca0}
+  pre .k{color:#74d0db}
+  pre .s{color:#9bdca9}
+  pre .v{color:#ecc178}
+  pre .p{color:#c3b4f5}
+  .codecap{font-size:12px;color:#8a96a3;margin:16px 0 -4px;font-weight:500}
 
-  /* callouts */
-  .note,.warn,.real{border-radius:12px; padding:14px 18px; margin:18px 0; font-size:15px}
-  .note{background:var(--panel); border:1px solid var(--border)}
-  .warn{background:var(--amber-soft); border:1px solid #efd9af}
-  .real{background:var(--violet-soft); border:1px solid #ddd1f7}
-  .note b,.warn b,.real b{font-family:"Space Grotesk",sans-serif}
-  .callkick{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.12em;
-    text-transform:uppercase; display:block; margin-bottom:4px}
-  .warn .callkick{color:var(--amber)} .real .callkick{color:var(--violet)} .note .callkick{color:var(--teal-d)}
+  /* how-to-read guide */
+  .howto{display:grid;gap:10px;margin:18px 0 4px}
+  .howto-item{display:flex;gap:13px;align-items:flex-start;border:1px solid #e3e8ef;border-radius:10px;padding:12px 15px;background:#fff}
+  .howto-item .tag{flex:0 0 86px;text-align:center;font-size:12.5px;font-weight:600;padding:4px 0;border-radius:6px;font-family:"Space Grotesk",sans-serif}
+  .howto .read .tag{background:#eef1f6;color:#46535f}
+  .howto .do .tag{background:#e9f0fe;color:#1d54c4}
+  .howto .sol .tag{background:#e7f5ed;color:#0f6b40}
+  .howto-item .txt{color:#46535f;font-size:14.8px}
 
-  /* ---------- LAB card (signature) ---------- */
-  .lab{display:grid; grid-template-columns:46px 1fr; margin:26px 0; border:1px solid var(--border);
-    border-radius:var(--radius); overflow:hidden; background:var(--surface);
-    box-shadow:0 1px 0 var(--panel-2)}
-  .lab .rail{background:var(--ink); color:#fff; display:flex; flex-direction:column;
-    align-items:center; justify-content:flex-start; padding-top:14px; gap:10px}
-  .lab .rail .id{font-family:"JetBrains Mono",monospace; font-size:11px; writing-mode:vertical-rl;
-    transform:rotate(180deg); letter-spacing:.18em; color:#9fb4cf}
-  .lab .rail .pin{width:8px;height:8px;border-radius:50%;background:var(--teal)}
-  .lab .body{padding:18px 22px 20px}
-  .lab .lhead{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:4px}
-  .lab .lhead h3{margin:0; font-size:19px}
-  .chip{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em;
-    text-transform:uppercase; padding:3px 9px; border-radius:999px; font-weight:600; border:1px solid transparent}
-  .chip.setup{background:#e7eefb;color:#2a4d9b;border-color:#cdddf6}
-  .chip.config{background:var(--teal-soft);color:#0a6b62;border-color:#bfe5de}
-  .chip.code{background:#fbe9ef;color:#a8316a;border-color:#f3ccda}
-  .chip.stretch{background:#fff;color:var(--muted);border-color:var(--border)}
-  .meta-line{font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--muted); margin:2px 0 12px}
-  .meta-line .d{color:var(--amber)}
-  .obj{background:var(--panel); border-left:3px solid var(--teal); padding:10px 14px;
-    border-radius:0 8px 8px 0; margin:0 0 14px; font-size:15px}
-  .obj b{font-family:"Space Grotesk",sans-serif; color:var(--teal-d)}
+  /* buttons */
+  .solbar{display:flex;gap:10px;margin:20px 0 4px}
+  .solbar button{font-size:13px;cursor:pointer;background:#fff;border:1px solid #d8dee8;color:#46535f;padding:8px 15px;border-radius:8px;font-family:inherit}
+  .solbar button:hover{border-color:#2f6feb;color:#1d54c4}
 
-  /* solution reveal */
-  details.sol{margin-top:16px; border:1px solid var(--emerald-bd); border-radius:10px;
-    background:var(--emerald-soft); overflow:hidden}
-  details.sol > summary{cursor:pointer; list-style:none; padding:11px 16px; font-weight:600;
-    font-family:"Space Grotesk",sans-serif; color:#0a6b46; display:flex; align-items:center; gap:9px;
-    font-size:14.5px; user-select:none}
-  details.sol > summary::-webkit-details-marker{display:none}
-  details.sol > summary .tri{transition:transform .18s ease; color:var(--emerald)}
-  details.sol[open] > summary .tri{transform:rotate(90deg)}
-  details.sol > summary:hover{background:#daf0e3}
-  details.sol > summary .lk{margin-left:auto; font-family:"JetBrains Mono",monospace;
-    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--emerald)}
-  .sol-body{padding:4px 18px 18px; background:var(--surface); border-top:1px solid var(--emerald-bd)}
-  .sol-body p:first-child{margin-top:14px}
-
-  /* toolbar */
-  .solbar{display:flex; gap:10px; align-items:center; margin:8px 0 26px}
-  .solbar button{font-family:"JetBrains Mono",monospace; font-size:12px; cursor:pointer;
-    background:var(--surface); border:1px solid var(--border); color:var(--muted);
-    padding:7px 13px; border-radius:8px}
-  .solbar button:hover{border-color:var(--teal); color:var(--teal-d)}
-
-  /* legend */
-  .legend{display:flex; flex-wrap:wrap; gap:8px 14px; margin:14px 0 4px; font-size:13px; color:var(--muted)}
-  .legend .chip{cursor:default}
+  /* callouts (calm + unified) */
+  .note,.warn,.real{border-radius:10px;padding:13px 16px;margin:16px 0;font-size:14.8px;border:1px solid #e3e8ef;border-left:4px solid #b9c4d4;background:#f7f9fc}
+  .warn{border-left-color:#e0a93f;background:#fdf7ec;border-color:#f0e3c6}
+  .callkick{display:block;font-weight:600;color:#16202c;margin-bottom:3px;font-family:"Space Grotesk",sans-serif;font-size:14px}
+  .warn .callkick{color:#8a5a00}
 
   /* tables */
-  table{border-collapse:collapse; width:100%; margin:16px 0; font-size:14.5px}
-  th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top}
-  th{font-family:"Space Grotesk",sans-serif; color:var(--ink); background:var(--panel); font-weight:600}
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid #e3e8ef;vertical-align:top}
+  th{color:#16202c;background:#f4f7fb;font-weight:600;font-family:"Space Grotesk",sans-serif}
 
-  /* path map */
-  .pathmap{display:grid; gap:10px; margin:18px 0 6px}
-  .pathmap .step{display:grid; grid-template-columns:60px 1fr; gap:14px; align-items:center;
-    border:1px solid var(--border); border-radius:10px; padding:11px 14px; background:var(--surface)}
-  .pathmap .step .n{font-family:"JetBrains Mono",monospace; font-weight:600; color:#fff;
-    background:var(--ink); border-radius:8px; text-align:center; padding:8px 0; font-size:13px}
-  .pathmap .step .n.t{background:var(--teal)} .pathmap .step .n.a{background:var(--amber)}
-  .pathmap .step .n.cd{background:#a8316a}
-  .pathmap .step h4{margin:0; font-size:15.5px}
-  .pathmap .step span{font-size:13.5px; color:var(--muted)}
+  /* LAB card */
+  .lab{display:block;border:1px solid #d6e0f0;border-radius:12px;overflow:hidden;margin:26px 0;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.05)}
+  .lab .rail{display:flex;align-items:center;gap:9px;background:#eef3fe;border-bottom:1px solid #d9e4fb;padding:10px 18px}
+  .lab .rail .pin{width:7px;height:7px;border-radius:50%;background:#2f6feb;flex:0 0 auto}
+  .lab .rail .id{writing-mode:horizontal-tb;transform:none;font-family:"JetBrains Mono",monospace;font-weight:600;font-size:12px;letter-spacing:.1em;color:#1d54c4}
+  .lab .rail .id::after{content:" · Hands-on task";color:#5f7cc4;font-weight:500;letter-spacing:0}
+  .lab .body{padding:16px 20px 18px}
+  .lab .lhead{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:4px}
+  .lab .lhead h3{margin:0;font-size:18.5px}
+  .chip{font-size:11px;letter-spacing:.03em;text-transform:uppercase;padding:3px 9px;border-radius:5px;font-weight:600;border:1px solid transparent;font-family:"Space Grotesk",sans-serif}
+  .chip.setup{background:#eef1f6;color:#5a6470;border-color:#e0e5ec}
+  .chip.config{background:#e9f0fe;color:#1d54c4;border-color:#d3e0fb}
+  .chip.code{background:#fdeef4;color:#b03a6e;border-color:#f4d3e1}
+  .chip.stretch{background:#fff;color:#8a96a3;border-color:#d8dee8}
+  .meta-line{font-size:13px;color:#8a96a3;margin:2px 0 13px;font-family:"JetBrains Mono",monospace}
+  .obj{background:#f5f8ff;border:1px solid #dde7fb;border-left:4px solid #2f6feb;padding:11px 14px;border-radius:0 8px 8px 0;margin:0 0 14px;font-size:15px}
+  .obj b{color:#1d54c4;font-family:"Space Grotesk",sans-serif}
 
-  footer{background:var(--ink); color:#9fb4cf; margin-top:60px; padding:34px 24px;
-    font-family:"JetBrains Mono",monospace; font-size:12.5px; text-align:center}
-  footer a{color:var(--code-cy); border:0}
+  /* solution reveal */
+  details.sol{margin-top:16px;border:1px solid #cfe7d9;border-radius:10px;background:#f3faf5;overflow:hidden}
+  details.sol>summary{cursor:pointer;list-style:none;padding:12px 16px;font-weight:600;font-family:"Space Grotesk",sans-serif;color:#0f6b40;display:flex;align-items:center;gap:9px;font-size:14.5px;user-select:none}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .tri{transition:transform .18s ease;color:#1a9f63;font-size:12px}
+  details.sol[open]>summary .tri{transform:rotate(90deg)}
+  details.sol>summary:hover{background:#e9f6ee}
+  details.sol>summary .lk{margin-left:auto;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#5a9a78;font-family:"JetBrains Mono",monospace;font-weight:500}
+  .sol-body{padding:6px 18px 18px;background:#fff;border-top:1px solid #cfe7d9}
+  .sol-body p:first-child{margin-top:14px}
 
-  *:focus-visible{outline:2px solid var(--teal); outline-offset:2px; border-radius:4px}
+  footer{background:#f4f7fb;color:#66727f;margin-top:54px;padding:30px 22px;font-size:13.5px;text-align:center;border-top:1px solid #e3e8ef}
+  footer a{color:#1d54c4;border:0}
+
+  *:focus-visible{outline:2px solid #2f6feb;outline-offset:2px;border-radius:4px}
 
   @media (max-width:900px){
-    .shell{grid-template-columns:1fr; gap:0}
+    .shell{grid-template-columns:1fr;gap:0}
     nav.toc{display:none}
-    .maprow{grid-template-columns:1fr; gap:2px; padding:12px 18px}
-    .maprow .arrow{display:none}
-    .maprow .learn{padding-left:0}
+    .howto-item .tag{flex-basis:72px}
   }
+
+  .mhead{display:flex;align-items:center;gap:14px;margin:0 0 8px;flex-wrap:wrap}
+  .mhead .mlabel{margin:0}
+  .ptrack{flex:0 1 170px;height:5px;background:#e6eaf1;border-radius:3px;overflow:hidden}
+  .pfill{display:block;height:100%;background:#2f6feb;border-radius:3px}
+  .built{display:flex;gap:11px;align-items:flex-start;margin:26px 0 0;padding:13px 16px;background:#eef3fe;border:1px solid #d9e4fb;border-radius:10px;font-size:14.8px;color:#26303c}
+  .built .ck{flex:0 0 auto;color:#1d54c4;font-weight:700}
+  .built b{color:#1d54c4;font-family:"Space Grotesk",sans-serif}
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-  <span>backstage@localhost</span><span class="path">: ~/backstage-tutorial</span>
-  <span class="blink">v1.51 · jun 2026 ▮</span>
-</div>
+<header class="topbar">
+  <span class="brand">Backstage Hands-On Tutorial</span>
+  <span class="ver">v1.51 &middot; June 2026</span>
+</header>
 
-<header class="hero">
+<section class="hero">
   <div class="wrap">
     <h1>Backstage Hands-On Learning Tutorial</h1>
-    <p class="lede">A practical, lab-based introduction to running and configuring a Backstage developer portal — the Software Catalog, TechDocs, Software Templates, plugins, and light backend changes.</p>
+    <p class="lede">A practical, lab-based introduction to running and configuring a Backstage developer portal &mdash; the Software Catalog, TechDocs, Software Templates, plugins, and light backend changes.</p>
     <div class="meta">
-      <span><b>Format</b> 9 hands-on labs · solutions hidden</span>
-      <span><b>Target</b> Backstage v1.51 line</span>
+      <span><b>9</b> hands-on labs</span>
+      <span>Solutions hidden until you reveal them</span>
+      <span><b>Target:</b> Backstage v1.51</span>
     </div>
   </div>
-</header>
+</section>
 
 <div class="shell">
   <nav class="toc" aria-label="Contents">
@@ -254,7 +169,7 @@
       <li><a href="#m4">4 · Software Templates</a></li>
       <li><a href="#m5">5 · Install a plugin</a></li>
       <li><a href="#m6">6 · Light backend code</a></li>
-      <li><a href="#m7">7 · Capstone</a></li>
+      <li><a href="#m7">7 · Final Demo</a></li>
       <li><a href="#appx">Appendix &amp; reference</a></li>
     </ol>
   </nav>
@@ -264,34 +179,22 @@
     <!-- HOW TO USE -->
     <section class="module" id="how">
       <p class="mlabel">Read first</p>
-      <h2>How to use this tutorial</h2>
-      <p>Work the modules in order. Every <strong>Lab</strong> is a small, real task with an objective and steps. The answer is folded away behind a <strong>Reveal solution</strong> bar — try the lab first, then open it to check your work or to get unstuck. Where code appears, it is short and explained line by line.</p>
-      <div class="legend">
-        <span>Lab types:</span>
-        <span class="chip setup">Setup</span>
-        <span class="chip config">Config</span>
-        <span class="chip code">Code</span>
-        <span class="chip stretch">Stretch</span>
+      <h2>How to read this page</h2>
+      <p>Work through the modules in order. The page uses three consistent blocks, so you always know what you're looking at:</p>
+      <div class="howto">
+        <div class="howto-item read"><span class="tag">Read</span><span class="txt">Plain paragraphs, tables, and shaded notes are <strong>theory</strong> &mdash; background to read before you act.</span></div>
+        <div class="howto-item do"><span class="tag">Lab</span><span class="txt">Boxed, numbered <strong>Labs</strong> with a blue header are <strong>tasks to do</strong> on your own machine.</span></div>
+        <div class="howto-item sol"><span class="tag">Solution</span><span class="txt">Every lab hides its <strong>solution</strong> in a green panel &mdash; try the task first, then click <em>Reveal solution</em>.</span></div>
       </div>
       <div class="solbar">
-        <button id="expand">⤢ Reveal all solutions</button>
-        <button id="collapse">⤡ Hide all solutions</button>
-      </div>
-      <div class="pathmap">
-        <div class="step"><div class="n t">0</div><div><h4>Orientation</h4><span>The mental model and vocabulary — what Backstage actually is.</span></div></div>
-        <div class="step"><div class="n t">1</div><div><h4>Stand it up</h4><span>Scaffold and run your own portal locally.</span></div></div>
-        <div class="step"><div class="n a">2</div><div><h4>Software Catalog</h4><span>Describe and register your services as entities.</span></div></div>
-        <div class="step"><div class="n a">3</div><div><h4>TechDocs</h4><span>Attach docs-as-code to a service.</span></div></div>
-        <div class="step"><div class="n a">4</div><div><h4>Software Templates</h4><span>Build a self-service golden path.</span></div></div>
-        <div class="step"><div class="n a">5</div><div><h4>Install a plugin</h4><span>Add capability with a dependency and config — no code.</span></div></div>
-        <div class="step"><div class="n cd">6</div><div><h4>Light backend code</h4><span>Wire a backend module; write one tiny custom action.</span></div></div>
-        <div class="step"><div class="n cd">7</div><div><h4>Capstone</h4><span>Combine everything on one service.</span></div></div>
+        <button id="expand">Reveal all solutions</button>
+        <button id="collapse">Hide all solutions</button>
       </div>
     </section>
 
     <!-- MODULE 0 -->
     <section class="module" id="m0">
-      <p class="mlabel">Module 0</p>
+      <p class="mlabel">Module 0 · Orientation</p>
       <h2>Orientation — the mental model</h2>
       <p>Backstage is <strong>not an application you install and use as-is</strong>. It is a framework: a CLI scaffolds a starter monorepo that you then <em>own</em> and evolve, the same way <code>create-react-app</code> gives you a project rather than a finished product. Think of it as a base Helm chart you fork and customise, not a SaaS you sign into.</p>
 
@@ -321,8 +224,8 @@
         <div class="rail"><span class="id">LAB-00</span><span class="pin"></span></div>
         <div class="body">
           <div class="lhead"><h3>Predict the layout</h3><span class="chip config">Config</span></div>
-          <div class="meta-line">⏱ 5 min · difficulty <span class="d">●</span>○○</div>
-          <div class="obj"><b>Objective:</b> Before scaffolding anything, write down where each of the following belongs: (a) the React entry point, (b) the backend plugin list, (c) the file you'd edit to point the portal at a database, (d) the file describing a single microservice.</div>
+          <div class="meta-line">5 min · Easy</div>
+          <div class="obj"><b>Your task:</b> Before scaffolding anything, write down where each of the following belongs: (a) the React entry point, (b) the backend plugin list, (c) the file you'd edit to point the portal at a database, (d) the file describing a single microservice.</div>
           <details class="sol">
             <summary><span class="tri">▸</span> Reveal solution <span class="lk">answer</span></summary>
             <div class="sol-body">
@@ -337,11 +240,12 @@
           </details>
         </div>
       </div>
+          <div class="built"><span class="ck">✓</span><span><b>You now understand</b> what Backstage is (a framework you own, not an app), the catalog / templates / TechDocs / plugins vocabulary, and the frontend vs backend split.</span></div>
     </section>
 
     <!-- MODULE 1 -->
     <section class="module" id="m1">
-      <p class="mlabel">Module 1</p>
+      <div class="mhead"><span class="mlabel">Module 1 of 7</span><span class="ptrack"><span class="pfill" style="width:14%"></span></span></div>
       <h2>Stand it up</h2>
       <p>You'll scaffold a fresh portal and run it. SQLite is the default database, so you need nothing external for development.</p>
 
@@ -350,16 +254,39 @@
         <tr><th>Tool</th><th>Version / note</th></tr>
         <tr><td>Node.js</td><td>An <strong>Active LTS</strong> release. In mid-2026 use <strong>Node 22</strong> (safe default) or 24; Node 20 reached end-of-life in April 2026. Backstage tracks the two most recent even LTS lines — confirm on the prerequisites page. Use <code>nvm</code> to switch.</td></tr>
         <tr><td>Yarn</td><td>Installed globally (<code>npm i -g yarn</code>). The project pins its own Yarn version after scaffolding.</td></tr>
-        <tr><td>Git</td><td>Any recent version.</td></tr>
-        <tr><td>Docker</td><td>Optional but recommended — TechDocs (Module 3) uses it to render Markdown. You can skip it with a local MkDocs install instead.</td></tr>
+        <tr><td>Git + GitHub</td><td>A GitHub account and a <strong>Personal Access Token (PAT)</strong> — set up below. Used from Module 2 onward.</td></tr>
+        <tr><td>Docker Desktop</td><td>Required for TechDocs (Module 3) and the local Jenkins lab (Module 5). macOS install steps below.</td></tr>
       </table>
+
+      <h3>Set up a GitHub Personal Access Token</h3>
+      <p>Several labs need the portal to read from (and later write to) your GitHub. Create a token once and keep it in an environment variable — never paste it into a file.</p>
+      <ol>
+        <li>GitHub → <strong>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</strong>.</li>
+        <li>Give it access to the repo you'll create in Module 2 (or "All repositories" for the labs).</li>
+        <li>Repository permissions: <strong>Contents</strong> = Read and write, <strong>Issues</strong> = Read and write, <strong>Pull requests</strong> = Read and write, <strong>Administration</strong> = Read and write (needed only if a template will create new repos).</li>
+        <li>Generate, copy it, and export it in the terminal where you run the portal:</li>
+      </ol>
+<pre><span class="c"># keep this in your shell profile or a local .env you don't commit</span>
+export GITHUB_TOKEN=github_pat_xxxxxxxx</pre>
+
+      <h3>Install Docker Desktop (macOS)</h3>
+      <p>TechDocs renders Markdown inside a container, and you'll run Jenkins locally in Docker. Install Docker Desktop for Mac:</p>
+<pre><span class="c"># option A — Homebrew</span>
+brew install --cask docker
+
+<span class="c"># option B — download the .dmg for Apple Silicon or Intel from docker.com</span>
+<span class="c">#   https://www.docker.com/products/docker-desktop/</span>
+
+<span class="c"># then LAUNCH Docker Desktop once (menu-bar whale must be running), and verify:</span>
+docker run --rm hello-world</pre>
+      <div class="note"><span class="callkick">Note</span> Docker Desktop must be <b>open and running</b> (not just installed) for the TechDocs and Jenkins labs — the whale icon should be in your macOS menu bar.</div>
 
       <div class="lab">
         <div class="rail"><span class="id">LAB-01</span><span class="pin"></span></div>
         <div class="body">
           <div class="lhead"><h3>Scaffold and run your first portal</h3><span class="chip setup">Setup</span></div>
-          <div class="meta-line">⏱ 15 min · difficulty <span class="d">●</span>○○</div>
-          <div class="obj"><b>Objective:</b> Create a new Backstage app, install dependencies, and open it in your browser with both the frontend and backend running.</div>
+          <div class="meta-line">15 min · Easy</div>
+          <div class="obj"><b>Your task:</b> Create a new Backstage app, install dependencies, and open it in your browser with both the frontend and backend running.</div>
           <p>The scaffolder command is <code>npx @backstage/create-app@latest</code>. When prompted, name it <code>my-portal</code> and accept SQLite. Then start it. The frontend runs on port <strong>3000</strong>, the backend on <strong>7007</strong>.</p>
           <details class="sol">
             <summary><span class="tri">▸</span> Reveal solution <span class="lk">commands</span></summary>
@@ -393,8 +320,8 @@ yarn dev</pre>
         <div class="rail"><span class="id">LAB-02</span><span class="pin"></span></div>
         <div class="body">
           <div class="lhead"><h3>Map the repository</h3><span class="chip setup">Setup</span></div>
-          <div class="meta-line">⏱ 10 min · difficulty <span class="d">●</span>○○</div>
-          <div class="obj"><b>Objective:</b> Open the project and locate five things: the frontend entry point, the backend plugin list, the main config, the local override config, and the example entities the starter ships with.</div>
+          <div class="meta-line">10 min · Easy</div>
+          <div class="obj"><b>Your task:</b> Open the project and locate five things: the frontend entry point, the backend plugin list, the main config, the local override config, and the example entities the starter ships with.</div>
           <details class="sol">
             <summary><span class="tri">▸</span> Reveal solution <span class="lk">tour</span></summary>
             <div class="sol-body">
@@ -413,11 +340,12 @@ yarn dev</pre>
           </details>
         </div>
       </div>
+          <div class="built"><span class="ck">✓</span><span><b>You've built</b> a running local portal (frontend on :3000, backend on :7007), plus the GitHub token and Docker setup the later modules rely on.</span></div>
     </section>
 
     <!-- MODULE 2 -->
     <section class="module" id="m2">
-      <p class="mlabel">Module 2</p>
+      <div class="mhead"><span class="mlabel">Module 2 of 7</span><span class="ptrack"><span class="pfill" style="width:29%"></span></span></div>
       <h2>Software Catalog</h2>
       <p>The catalog is your inventory. Each thing you track is an <strong>entity</strong> described by a YAML file — by convention <code>catalog-info.yaml</code>, kept in the same repo as the thing it describes. Every entity has the same envelope:</p>
       <p class="codecap">the entity envelope</p>
@@ -425,7 +353,7 @@ yarn dev</pre>
 <span class="k">kind:</span> <span class="s">Component</span>          <span class="c"># Component | API | Resource | System | Domain | Group | User | Location</span>
 <span class="k">metadata:</span>
   <span class="k">name:</span> <span class="s">my-service</span>      <span class="c"># identity</span>
-  <span class="k">annotations:</span> {}      <span class="c"># pointers into external systems (Grafana, GitHub, PagerDuty…)</span>
+  <span class="k">annotations:</span> {}      <span class="c"># pointers into external systems (GitHub, Jenkins, dashboards…)</span>
 <span class="k">spec:</span>
   <span class="k">type:</span> <span class="s">service</span>         <span class="c"># kind-specific fields go here</span></pre>
       <p>The most common <strong>kinds</strong>: <code>Component</code> (a unit of software), <code>API</code>, <code>Resource</code> (infra like a DB or bucket), <code>System</code>/<code>Domain</code> (grouping), and <code>Group</code>/<code>User</code> (ownership). An entity's <code>spec.owner</code> must point at a <code>Group</code> or <code>User</code> that exists in the catalog.</p>
@@ -433,38 +361,41 @@ yarn dev</pre>
       <div class="lab">
         <div class="rail"><span class="id">LAB-03</span><span class="pin"></span></div>
         <div class="body">
-          <div class="lhead"><h3>Register your first Component</h3><span class="chip config">Config</span></div>
-          <div class="meta-line">⏱ 20 min · difficulty <span class="d">●●</span>○</div>
-          <div class="obj"><b>Objective:</b> Describe a real service of yours (e.g. <code>payments-api</code>) as a <code>Component</code> and get it to appear in the catalog two ways — by pointing config at a local file, and via the UI import flow.</div>
-          <p>Create <code>examples/payments-api/catalog-info.yaml</code> with sensible metadata (tags, a link to a dashboard, a GitHub annotation). Then register it. For local development the simplest registration is a <code>type: file</code> location in <code>app-config.local.yaml</code>.</p>
+          <div class="lhead"><h3>Register a Component from your GitHub repo</h3><span class="chip config">Config</span></div>
+          <div class="meta-line">25 min · Medium</div>
+          <div class="obj"><b>Your task:</b> Create a real GitHub repo with a <code>catalog-info.yaml</code>, connect the portal to GitHub with your PAT, and register the component from the UI by pasting the file's URL.</div>
+          <p>This uses only GitHub — no cloud, no dummy links. Throughout the labs, replace <code>your-org/demo-service</code> with the repo you actually create.</p>
           <details class="sol">
-            <summary><span class="tri">▸</span> Reveal solution <span class="lk">files + config</span></summary>
+            <summary><span class="tri">▸</span> Reveal solution <span class="lk">repo + config + register</span></summary>
             <div class="sol-body">
-              <p class="codecap">examples/payments-api/catalog-info.yaml</p>
+              <p class="codecap">1 · create a GitHub repo and add this file at its root</p>
+              <p>On GitHub, create a repo (e.g. <code>demo-service</code>). Add a file named <code>catalog-info.yaml</code>:</p>
 <pre><span class="k">apiVersion:</span> <span class="s">backstage.io/v1alpha1</span>
 <span class="k">kind:</span> <span class="s">Component</span>
 <span class="k">metadata:</span>
-  <span class="k">name:</span> <span class="s">payments-api</span>
-  <span class="k">description:</span> <span class="s">Handles payment capture and refunds</span>
+  <span class="k">name:</span> <span class="s">demo-service</span>
+  <span class="k">description:</span> <span class="s">My first catalog entry</span>
   <span class="k">annotations:</span>
-    <span class="k">github.com/project-slug:</span> <span class="s">my-org/payments-api</span>
-  <span class="k">tags:</span> [<span class="s">java</span>, <span class="s">payments</span>]
-  <span class="k">links:</span>
-    - <span class="k">url:</span> <span class="s">https://grafana.example.com/d/payments</span>
-      <span class="k">title:</span> <span class="s">Grafana dashboard</span>
-      <span class="k">icon:</span> <span class="s">dashboard</span>
+    <span class="k">github.com/project-slug:</span> <span class="s">your-org/demo-service</span>   <span class="c"># your real org/repo</span>
+  <span class="k">tags:</span> [<span class="s">demo</span>, <span class="s">platform</span>]
 <span class="k">spec:</span>
   <span class="k">type:</span> <span class="s">service</span>
-  <span class="k">lifecycle:</span> <span class="s">production</span>      <span class="c"># experimental | production | deprecated</span>
-  <span class="k">owner:</span> <span class="s">team-payments</span>      <span class="c"># must resolve to a Group/User (see LAB-04)</span>
-  <span class="k">system:</span> <span class="s">commerce</span></pre>
-              <p class="codecap">app-config.local.yaml — register the file</p>
+  <span class="k">lifecycle:</span> <span class="s">experimental</span>   <span class="c"># experimental | production | deprecated</span>
+  <span class="k">owner:</span> <span class="s">platform-team</span>       <span class="c"># resolved in LAB-04</span></pre>
+              <p class="codecap">2 · app-config.local.yaml — connect the portal to GitHub</p>
+<pre><span class="k">integrations:</span>
+  <span class="k">github:</span>
+    - <span class="k">host:</span> <span class="s">github.com</span>
+      <span class="k">token:</span> <span class="v">${GITHUB_TOKEN}</span>   <span class="c"># the PAT you exported in Module 1</span></pre>
+              <p>Restart with the token exported (<code>export GITHUB_TOKEN=… &amp;&amp; yarn dev</code>).</p>
+              <p class="codecap">3 · register it from the UI</p>
+              <p>In the portal go to <strong>Create → Register Existing Component</strong> (<code>/catalog-import</code>) and paste the full URL to the file, for example <code>https://github.com/your-org/demo-service/blob/main/catalog-info.yaml</code>. Analyze → Import. The component now appears under <strong>Catalog</strong>. The owner won't resolve yet — you'll fix that in LAB-04.</p>
+              <div class="note"><span class="callkick">Local-file alternative</span> If you'd rather not push to GitHub yet, drop the same file at <code>examples/demo-service/catalog-info.yaml</code> and point config at it instead:
 <pre><span class="k">catalog:</span>
   <span class="k">locations:</span>
     - <span class="k">type:</span> <span class="s">file</span>
-      <span class="k">target:</span> <span class="s">../../examples/payments-api/catalog-info.yaml</span></pre>
-              <p>Restart <code>yarn dev</code>; the component appears under <strong>Catalog</strong>. The owner won't resolve yet — that's expected; you'll add the Group in LAB-04.</p>
-              <p><strong>The UI way (no config edit):</strong> in the portal go to <strong>Create → Register Existing Component</strong> (URL <code>/catalog-import</code>), paste the URL of a <code>catalog-info.yaml</code> hosted in Git, and import. This is how engineers self-register day-to-day; the file-location method is handy for local labs.</p>
+      <span class="k">target:</span> <span class="s">../../examples/demo-service/catalog-info.yaml</span></pre>
+              The GitHub route is closer to how engineers self-register day-to-day, so prefer it once your token works.</div>
             </div>
           </details>
         </div>
@@ -474,9 +405,9 @@ yarn dev</pre>
         <div class="rail"><span class="id">LAB-04</span><span class="pin"></span></div>
         <div class="body">
           <div class="lhead"><h3>Add ownership: a Group, a User, a System</h3><span class="chip config">Config</span></div>
-          <div class="meta-line">⏱ 15 min · difficulty <span class="d">●●</span>○</div>
-          <div class="obj"><b>Objective:</b> Make <code>payments-api</code>'s owner resolve by defining the <code>team-payments</code> Group, a User who belongs to it, and the <code>commerce</code> System — so the relationships render on the entity page.</div>
-          <p>Tip: a single YAML file can hold multiple entities separated by <code>---</code>.</p>
+          <div class="meta-line">15 min · Medium</div>
+          <div class="obj"><b>Your task:</b> Make <code>demo-service</code>'s owner resolve by defining the <code>platform-team</code> Group, a User in it, and an <code>internal-tools</code> System — so ownership renders on the entity page.</div>
+          <p>For org entities a local file is simplest. Tip: one YAML file can hold multiple entities separated by <code>---</code>.</p>
           <details class="sol">
             <summary><span class="tri">▸</span> Reveal solution <span class="lk">org entities</span></summary>
             <div class="sol-body">
@@ -484,7 +415,7 @@ yarn dev</pre>
 <pre><span class="k">apiVersion:</span> <span class="s">backstage.io/v1alpha1</span>
 <span class="k">kind:</span> <span class="s">Group</span>
 <span class="k">metadata:</span>
-  <span class="k">name:</span> <span class="s">team-payments</span>
+  <span class="k">name:</span> <span class="s">platform-team</span>
 <span class="k">spec:</span>
   <span class="k">type:</span> <span class="s">team</span>
   <span class="k">children:</span> []
@@ -492,38 +423,37 @@ yarn dev</pre>
 <span class="k">apiVersion:</span> <span class="s">backstage.io/v1alpha1</span>
 <span class="k">kind:</span> <span class="s">User</span>
 <span class="k">metadata:</span>
-  <span class="k">name:</span> <span class="s">jdoe</span>
+  <span class="k">name:</span> <span class="s">your-username</span>
 <span class="k">spec:</span>
-  <span class="k">memberOf:</span> [<span class="s">team-payments</span>]
+  <span class="k">memberOf:</span> [<span class="s">platform-team</span>]
 ---
 <span class="k">apiVersion:</span> <span class="s">backstage.io/v1alpha1</span>
 <span class="k">kind:</span> <span class="s">System</span>
 <span class="k">metadata:</span>
-  <span class="k">name:</span> <span class="s">commerce</span>
+  <span class="k">name:</span> <span class="s">internal-tools</span>
 <span class="k">spec:</span>
-  <span class="k">owner:</span> <span class="s">team-payments</span></pre>
-              <p class="codecap">app-config.local.yaml — add the new location</p>
+  <span class="k">owner:</span> <span class="s">platform-team</span></pre>
+              <p class="codecap">app-config.local.yaml — register the org file</p>
 <pre><span class="k">catalog:</span>
   <span class="k">locations:</span>
     - <span class="k">type:</span> <span class="s">file</span>
-      <span class="k">target:</span> <span class="s">../../examples/payments-api/catalog-info.yaml</span>
-    - <span class="k">type:</span> <span class="s">file</span>
       <span class="k">target:</span> <span class="s">../../examples/org/catalog-info.yaml</span></pre>
-              <p>After restart, the <code>payments-api</code> page shows <strong>team-payments</strong> as owner and lists it under the <strong>commerce</strong> system. A fully-qualified owner reference looks like <code>group:default/team-payments</code>; the short form <code>team-payments</code> works because everything is in the <code>default</code> namespace.</p>
+              <p>After restart, the <code>demo-service</code> page shows <strong>platform-team</strong> as owner. A fully-qualified owner reference looks like <code>group:default/platform-team</code>; the short form <code>platform-team</code> works because everything is in the <code>default</code> namespace. To group the service under the system, add <code>system: internal-tools</code> under its <code>spec</code>.</p>
             </div>
           </details>
         </div>
       </div>
+          <div class="built"><span class="ck">✓</span><span><b>You've built</b> your first catalog entry from a GitHub repo, with a Group, User, and System giving the service real ownership.</span></div>
     </section>
 
     <!-- MODULE 3 -->
     <section class="module" id="m3">
-      <p class="mlabel">Module 3</p>
+      <div class="mhead"><span class="mlabel">Module 3 of 7</span><span class="ptrack"><span class="pfill" style="width:43%"></span></span></div>
       <h2>TechDocs</h2>
       <p>TechDocs is docs-as-code: you write Markdown in a <code>docs/</code> folder, describe it with <code>mkdocs.yml</code>, and Backstage renders it on the service's <strong>Docs</strong> tab. The link between a catalog entity and its docs is one annotation: <code>backstage.io/techdocs-ref</code>.</p>
       <p>Three pieces sit together in the component's repo, alongside its <code>catalog-info.yaml</code>:</p>
       <p class="codecap">repo layout for a documented component</p>
-<pre>payments-api/
+<pre>demo-service/
 ├── <span class="k">catalog-info.yaml</span>
 ├── <span class="k">mkdocs.yml</span>
 └── docs/
@@ -533,147 +463,186 @@ yarn dev</pre>
         <div class="rail"><span class="id">LAB-05</span><span class="pin"></span></div>
         <div class="body">
           <div class="lhead"><h3>Attach docs to a service</h3><span class="chip config">Config</span></div>
-          <div class="meta-line">⏱ 25 min · difficulty <span class="d">●●</span>○</div>
-          <div class="obj"><b>Objective:</b> Add MkDocs to <code>payments-api</code>, link it with the <code>techdocs-ref</code> annotation, configure TechDocs for local development, and view the rendered Docs tab in the portal.</div>
-          <p>You'll need a generator. The default uses Docker; if you'd rather not run Docker, install MkDocs locally and switch the generator to <code>local</code>.</p>
+          <div class="meta-line">25 min · Medium</div>
+          <div class="obj"><b>Your task:</b> Add MkDocs to <code>demo-service</code>, link it with the <code>techdocs-ref</code> annotation, point TechDocs at Docker for rendering, and view the rendered Docs tab.</div>
+          <p>This uses the Docker Desktop you installed in Module 1 — make sure it's running. A local MkDocs install is shown as a fallback.</p>
           <details class="sol">
             <summary><span class="tri">▸</span> Reveal solution <span class="lk">docs + config</span></summary>
             <div class="sol-body">
-              <p class="codecap">examples/payments-api/mkdocs.yml</p>
-<pre><span class="k">site_name:</span> <span class="s">payments-api</span>
+              <p>Add these two files next to the repo's <code>catalog-info.yaml</code> (in the GitHub repo, or in <code>examples/demo-service/</code> if you used the local-file route).</p>
+              <p class="codecap">mkdocs.yml</p>
+<pre><span class="k">site_name:</span> <span class="s">demo-service</span>
 <span class="k">nav:</span>
   - <span class="k">Home:</span> <span class="s">index.md</span>
   - <span class="k">Runbook:</span> <span class="s">runbook.md</span>
 <span class="k">plugins:</span>
   - <span class="s">techdocs-core</span>   <span class="c"># optional — Backstage adds it automatically if omitted</span></pre>
-              <p class="codecap">examples/payments-api/docs/index.md</p>
-<pre><span class="c"># Payments API</span>
+              <p class="codecap">docs/index.md</p>
+<pre><span class="c"># demo-service</span>
 
-Captures and refunds payments. Owned by **team-payments**.
+My first service in the developer portal, owned by **platform-team**.
 
-<span class="c">## SLOs</span>
-- p99 latency &lt; 250ms
-- availability 99.95%</pre>
-              <p class="codecap">examples/payments-api/catalog-info.yaml — add the annotation</p>
+<span class="c">## Notes</span>
+- This page is rendered from Markdown by TechDocs.
+- Edit the Markdown, refresh, and the Docs tab updates.</pre>
+              <p class="codecap">catalog-info.yaml — add the annotation</p>
 <pre><span class="k">metadata:</span>
-  <span class="k">name:</span> <span class="s">payments-api</span>
+  <span class="k">name:</span> <span class="s">demo-service</span>
   <span class="k">annotations:</span>
     <span class="k">backstage.io/techdocs-ref:</span> <span class="s">dir:.</span>   <span class="c"># docs live in this same directory</span></pre>
-              <p class="codecap">app-config.yaml — TechDocs for local dev</p>
+              <p class="codecap">app-config.yaml — TechDocs for local dev (Docker)</p>
 <pre><span class="k">techdocs:</span>
   <span class="k">builder:</span> <span class="s">'local'</span>          <span class="c"># Backstage builds docs on demand (dev only)</span>
   <span class="k">generator:</span>
-    <span class="k">runIn:</span> <span class="s">'docker'</span>         <span class="c"># default; needs Docker running</span>
+    <span class="k">runIn:</span> <span class="s">'docker'</span>         <span class="c"># uses your running Docker Desktop</span>
   <span class="k">publisher:</span>
     <span class="k">type:</span> <span class="s">'local'</span></pre>
-              <div class="note"><span class="callkick">No Docker?</span> Set <code>generator.runIn: 'local'</code> and install MkDocs into your environment:
+              <div class="note"><span class="callkick">Prefer no Docker?</span> Set <code>generator.runIn: 'local'</code> and install MkDocs instead:
 <pre><span class="c"># install mkdocs-techdocs-core LAST, after any other python deps</span>
 pip install mkdocs-techdocs-core</pre>
               </div>
-              <p>Restart, open <code>payments-api</code>, click the <strong>Docs</strong> tab. Backstage fetches the Markdown, runs MkDocs, and renders the site with the nav you defined.</p>
-              <div class="real"><span class="callkick">In production</span> Documentation is not built inside the portal. You set <code>techdocs.builder: 'external'</code>, generate the static site in CI/CD, and publish the output to object storage — <b>S3</b>, <b>GCS</b>, or Azure Blob via the <code>publisher</code> config. The portal then serves the prebuilt files.</div>
+              <p>Restart, open <code>demo-service</code>, click the <strong>Docs</strong> tab. Backstage fetches the Markdown, runs MkDocs (in Docker), and renders the site with your nav.</p>
+              <div class="real"><span class="callkick">In production</span> Documentation is not built inside the portal. You set <code>techdocs.builder: 'external'</code>, generate the static site in CI/CD, and publish the output to object storage via the <code>publisher</code> config. The portal then serves the prebuilt files.</div>
             </div>
           </details>
         </div>
       </div>
+          <div class="built"><span class="ck">✓</span><span><b>You've built</b> docs-as-code for your service, rendered on its Docs tab through Docker.</span></div>
     </section>
 
     <!-- MODULE 4 -->
     <section class="module" id="m4">
-      <p class="mlabel">Module 4</p>
+      <div class="mhead"><span class="mlabel">Module 4 of 7</span><span class="ptrack"><span class="pfill" style="width:57%"></span></span></div>
       <h2>Software Templates (Scaffolder)</h2>
       <p>A template is a YAML file (<code>kind: Template</code>) with three jobs: a set of <strong>parameters</strong> that render as a form, a sequence of <strong>steps</strong> that each run a built-in <strong>action</strong>, and optional <strong>output</strong> links. It's a golden path: fill the form, get a scaffolded, registered, ready-to-go service. The format version is <code>scaffolder.backstage.io/v1beta3</code>.</p>
-      <p>Templates show up under <strong>Create</strong> (<code>/create</code>). The full list of actions available in your instance is browsable at <code>/create/actions</code> — common ones are <code>fetch:template</code> (render a skeleton), <code>publish:github</code> / <code>publish:gitlab</code> (create the repo), and <code>catalog:register</code> (add the new component to the catalog).</p>
+      <p>Templates show up under <strong>Create</strong> (<code>/create</code>). The full list of actions available in your instance is browsable at <code>/create/actions</code> — common ones are <code>fetch:template</code> (render a skeleton), <code>publish:github</code> (create the repo), and <code>catalog:register</code> (add the new entity to the catalog).</p>
+      <p>We'll build a practical one: a <strong>self-service "Request infrastructure" form</strong>. It collects a few choices, generates a Terraform stub plus a catalog entry, and opens a new GitHub repo for review. No cloud access is needed — the template produces the IaC and a repo; the actual <code>terraform apply</code> would run later in a pipeline.</p>
 
       <div class="lab">
         <div class="rail"><span class="id">LAB-06</span><span class="pin"></span></div>
         <div class="body">
-          <div class="lhead"><h3>Build and run a golden-path template</h3><span class="chip config">Config</span></div>
-          <div class="meta-line">⏱ 35 min · difficulty <span class="d">●●●</span></div>
-          <div class="obj"><b>Objective:</b> Create a template that asks for a service name and owner, renders a skeleton (a templated <code>catalog-info.yaml</code> + README), and logs the result. Register the template, open <code>/create</code>, and run it.</div>
-          <p>To keep this fully offline we'll use <code>fetch:template</code> + <code>debug:log</code> (no GitHub needed). The real-world publish/register steps are shown in the callout afterward.</p>
+          <div class="lhead"><h3>Build a self-service "Request infrastructure" template</h3><span class="chip config">Config</span></div>
+          <div class="meta-line">40 min · Hard</div>
+          <div class="obj"><b>Your task:</b> Create a template whose form collects a name, owner, cloud provider, environment, and size; generates a Terraform stub + a <code>Resource</code> catalog entry + README; then publishes a new GitHub repo and registers it in the catalog.</div>
+          <p>This needs your GitHub PAT (Module 1). <code>publish:github</code> is provided by the GitHub scaffolder module — the starter usually includes it; if <code>/create/actions</code> doesn't list it, add it via Module 6 (the one-line pattern in LAB-08).</p>
           <details class="sol">
             <summary><span class="tri">▸</span> Reveal solution <span class="lk">template + skeleton</span></summary>
             <div class="sol-body">
-              <p class="codecap">examples/templates/new-service/template.yaml</p>
+              <p class="codecap">examples/templates/request-infra/template.yaml</p>
 <pre><span class="k">apiVersion:</span> <span class="s">scaffolder.backstage.io/v1beta3</span>
 <span class="k">kind:</span> <span class="s">Template</span>
 <span class="k">metadata:</span>
-  <span class="k">name:</span> <span class="s">new-service</span>
-  <span class="k">title:</span> <span class="s">New service skeleton</span>
-  <span class="k">description:</span> <span class="s">Scaffolds a service folder with a catalog-info.yaml</span>
+  <span class="k">name:</span> <span class="s">request-infra</span>
+  <span class="k">title:</span> <span class="s">Request infrastructure</span>
+  <span class="k">description:</span> <span class="s">Generate a Terraform stub and open a repo for review</span>
 <span class="k">spec:</span>
-  <span class="k">owner:</span> <span class="s">team-payments</span>
-  <span class="k">type:</span> <span class="s">service</span>
+  <span class="k">owner:</span> <span class="s">platform-team</span>
+  <span class="k">type:</span> <span class="s">resource</span>
   <span class="k">parameters:</span>
-    - <span class="k">title:</span> <span class="s">Service details</span>
-      <span class="k">required:</span> [<span class="s">name</span>, <span class="s">owner</span>]
+    - <span class="k">title:</span> <span class="s">Request details</span>
+      <span class="k">required:</span> [<span class="s">name</span>, <span class="s">owner</span>, <span class="s">cloud</span>, <span class="s">environment</span>, <span class="s">size</span>]
       <span class="k">properties:</span>
         <span class="k">name:</span>
-          <span class="k">title:</span> <span class="s">Name</span>
+          <span class="k">title:</span> <span class="s">Resource name</span>
           <span class="k">type:</span> <span class="s">string</span>
           <span class="k">ui:autofocus:</span> <span class="s">true</span>
         <span class="k">owner:</span>
           <span class="k">title:</span> <span class="s">Owner</span>
           <span class="k">type:</span> <span class="s">string</span>
-          <span class="k">ui:field:</span> <span class="s">OwnerPicker</span>        <span class="c"># dropdown of catalog Groups</span>
+          <span class="k">ui:field:</span> <span class="s">OwnerPicker</span>
           <span class="k">ui:options:</span>
             <span class="k">catalogFilter:</span>
               <span class="k">kind:</span> <span class="s">Group</span>
+        <span class="k">cloud:</span>
+          <span class="k">title:</span> <span class="s">Cloud provider</span>
+          <span class="k">type:</span> <span class="s">string</span>
+          <span class="k">enum:</span> [<span class="s">aws</span>, <span class="s">gcp</span>, <span class="s">azure</span>]
+        <span class="k">environment:</span>
+          <span class="k">title:</span> <span class="s">Environment</span>
+          <span class="k">type:</span> <span class="s">string</span>
+          <span class="k">enum:</span> [<span class="s">dev</span>, <span class="s">staging</span>, <span class="s">prod</span>]
+        <span class="k">size:</span>
+          <span class="k">title:</span> <span class="s">Size</span>
+          <span class="k">type:</span> <span class="s">string</span>
+          <span class="k">enum:</span> [<span class="s">small</span>, <span class="s">medium</span>, <span class="s">large</span>]
   <span class="k">steps:</span>
     - <span class="k">id:</span> <span class="s">fetch</span>
-      <span class="k">name:</span> <span class="s">Render skeleton</span>
+      <span class="k">name:</span> <span class="s">Render Terraform stub</span>
       <span class="k">action:</span> <span class="s">fetch:template</span>
       <span class="k">input:</span>
         <span class="k">url:</span> <span class="s">./skeleton</span>
         <span class="k">values:</span>
           <span class="k">name:</span> <span class="v">${{ parameters.name }}</span>
           <span class="k">owner:</span> <span class="v">${{ parameters.owner }}</span>
-    - <span class="k">id:</span> <span class="s">log</span>
-      <span class="k">name:</span> <span class="s">Report</span>
-      <span class="k">action:</span> <span class="s">debug:log</span>
+          <span class="k">cloud:</span> <span class="v">${{ parameters.cloud }}</span>
+          <span class="k">environment:</span> <span class="v">${{ parameters.environment }}</span>
+          <span class="k">size:</span> <span class="v">${{ parameters.size }}</span>
+    - <span class="k">id:</span> <span class="s">publish</span>
+      <span class="k">name:</span> <span class="s">Open a GitHub repo</span>
+      <span class="k">action:</span> <span class="s">publish:github</span>
       <span class="k">input:</span>
-        <span class="k">message:</span> <span class="s">Scaffolded</span> <span class="v">${{ parameters.name }}</span> <span class="s">for</span> <span class="v">${{ parameters.owner }}</span></pre>
-              <p class="codecap">examples/templates/new-service/skeleton/catalog-info.yaml</p>
+        <span class="k">repoUrl:</span> <span class="s">github.com?owner=your-org&amp;repo=</span><span class="v">${{ parameters.name }}</span>
+        <span class="k">description:</span> <span class="s">Infra request for</span> <span class="v">${{ parameters.name }}</span>
+    - <span class="k">id:</span> <span class="s">register</span>
+      <span class="k">name:</span> <span class="s">Register in catalog</span>
+      <span class="k">action:</span> <span class="s">catalog:register</span>
+      <span class="k">input:</span>
+        <span class="k">repoContentsUrl:</span> <span class="v">${{ steps.publish.output.repoContentsUrl }}</span>
+        <span class="k">catalogInfoPath:</span> <span class="s">/catalog-info.yaml</span>
+  <span class="k">output:</span>
+    <span class="k">links:</span>
+      - <span class="k">title:</span> <span class="s">Open the repo</span>
+        <span class="k">url:</span> <span class="v">${{ steps.publish.output.remoteUrl }}</span>
+      - <span class="k">title:</span> <span class="s">Open in catalog</span>
+        <span class="k">icon:</span> <span class="s">catalog</span>
+        <span class="k">entityRef:</span> <span class="v">${{ steps.register.output.entityRef }}</span></pre>
+              <p class="codecap">examples/templates/request-infra/skeleton/main.tf</p>
+<pre><span class="c"># Terraform stub generated by the developer portal.</span>
+<span class="c"># apply happens in CI/CD, not from the portal.</span>
+<span class="k">terraform</span> {
+  <span class="k">required_version</span> = <span class="s">"&gt;= 1.6"</span>
+}
+
+<span class="c"># cloud:       ${{ values.cloud }}</span>
+<span class="c"># environment: ${{ values.environment }}</span>
+<span class="c"># size:        ${{ values.size }}</span>
+
+<span class="c"># TODO: call your real module, e.g.</span>
+<span class="c"># module "${{ values.name }}" {</span>
+<span class="c">#   source = "git::https://github.com/your-org/terraform-modules//compute"</span>
+<span class="c"># }</span></pre>
+              <p class="codecap">examples/templates/request-infra/skeleton/catalog-info.yaml</p>
 <pre><span class="k">apiVersion:</span> <span class="s">backstage.io/v1alpha1</span>
-<span class="k">kind:</span> <span class="s">Component</span>
+<span class="k">kind:</span> <span class="s">Resource</span>
 <span class="k">metadata:</span>
   <span class="k">name:</span> <span class="v">${{ values.name }}</span>
 <span class="k">spec:</span>
-  <span class="k">type:</span> <span class="s">service</span>
-  <span class="k">lifecycle:</span> <span class="s">experimental</span>
-  <span class="k">owner:</span> <span class="v">${{ values.owner }}</span></pre>
+  <span class="k">type:</span> <span class="s">cloud-resource</span>
+  <span class="k">owner:</span> <span class="v">${{ values.owner }}</span>
+  <span class="k">system:</span> <span class="s">internal-tools</span></pre>
               <p class="codecap">app-config.local.yaml — register the template (note the rules)</p>
 <pre><span class="k">catalog:</span>
   <span class="k">locations:</span>
     - <span class="k">type:</span> <span class="s">file</span>
-      <span class="k">target:</span> <span class="s">../../examples/templates/new-service/template.yaml</span>
+      <span class="k">target:</span> <span class="s">../../examples/templates/request-infra/template.yaml</span>
       <span class="k">rules:</span>
         - <span class="k">allow:</span> [<span class="s">Template</span>]   <span class="c"># file locations must explicitly allow the Template kind</span></pre>
-              <p>Restart, open <strong>Create</strong> (<code>/create</code>), launch <em>New service skeleton</em>, fill the form, and run. Watch the task log render the skeleton and print your message. Two reusable ideas to notice: <code>${{ parameters.x }}</code> reads form input inside the template; <code>${{ values.x }}</code> reads it inside skeleton files.</p>
-              <div class="warn"><span class="callkick">Troubleshooting</span> On Node 20+ the scaffolder needs a flag to run templates safely. If a run fails immediately, start the dev server with:
+              <p>Restart, open <strong>Create</strong> (<code>/create</code>), launch <em>Request infrastructure</em>, fill the form, and run. The task creates the repo with your Terraform stub and registers the new <code>Resource</code>. Two reusable ideas: <code>${{ parameters.x }}</code> reads form input in the template; <code>${{ values.x }}</code> reads it inside skeleton files.</p>
+              <div class="warn"><span class="callkick">Troubleshooting</span> If a run fails instantly on Node 22/24, start the dev server with the scaffolder flag:
 <pre>export NODE_OPTIONS=--no-node-snapshot
-yarn dev</pre></div>
-              <div class="real"><span class="callkick">The real golden path</span> In a live portal you'd swap <code>debug:log</code> for the actions that make it real — exactly the automation you already write by hand:
-<pre><span class="k">- id:</span> <span class="s">publish</span>
-  <span class="k">action:</span> <span class="s">publish:github</span>
-  <span class="k">input:</span>
-    <span class="k">repoUrl:</span> <span class="s">github.com?owner=my-org&amp;repo=</span><span class="v">${{ parameters.name }}</span>
-<span class="k">- id:</span> <span class="s">register</span>
-  <span class="k">action:</span> <span class="s">catalog:register</span>
-  <span class="k">input:</span>
-    <span class="k">repoContentsUrl:</span> <span class="v">${{ steps.publish.output.repoContentsUrl }}</span>
-    <span class="k">catalogInfoPath:</span> <span class="s">/catalog-info.yaml</span></pre>
-              A template that wraps <code>publish:github</code> and <code>catalog:register</code> turns repository creation, boilerplate, and catalog onboarding into a single self-service form — no manual setup required.</div>
+yarn dev</pre>
+              And if <code>/create/actions</code> doesn't list <code>publish:github</code>, register the GitHub scaffolder module (Module 6, LAB-08 shows the one-line pattern).</div>
+              <div class="real"><span class="callkick">More GitOps-style variant</span> Instead of creating a brand-new repo, point a single central <code>infra</code> repo and open a <b>Pull Request</b> into it (using the GitHub PR scaffolder actions) so changes are reviewed before merge — then a pipeline runs <code>terraform plan/apply</code> on merge. Same template, different publish step.</div>
             </div>
           </details>
         </div>
       </div>
+          <div class="built"><span class="ck">✓</span><span><b>You've built</b> a self-service “Request infrastructure” template that generates a Terraform stub, opens a GitHub repo, and registers it in the catalog.</span></div>
     </section>
 
     <!-- MODULE 5 -->
     <section class="module" id="m5">
-      <p class="mlabel">Module 5</p>
+      <div class="mhead"><span class="mlabel">Module 5 of 7</span><span class="ptrack"><span class="pfill" style="width:71%"></span></span></div>
       <h2>Install a plugin — config only</h2>
       <p>This is where the New Frontend System pays off. Installing a plugin is two moves: add the package as a dependency, then (optionally) configure it in <code>app-config.yaml</code>. <strong>Feature discovery</strong> wires it in automatically — no editing React code.</p>
       <p>New apps ship with discovery on:</p>
@@ -686,27 +655,29 @@ yarn dev</pre></div>
         <div class="rail"><span class="id">LAB-07</span><span class="pin"></span></div>
         <div class="body">
           <div class="lhead"><h3>Add a CI/CD view to a service</h3><span class="chip config">Config</span></div>
-          <div class="meta-line">⏱ 25 min · difficulty <span class="d">●●</span>○</div>
-          <div class="obj"><b>Objective:</b> Install the GitHub Actions frontend plugin, configure a GitHub integration so the portal can read workflow runs, and annotate <code>payments-api</code> so its page surfaces CI/CD.</div>
+          <div class="meta-line">25 min · Medium</div>
+          <div class="obj"><b>Your task:</b> Install the GitHub Actions frontend plugin and surface CI/CD on <code>demo-service</code>'s page. You'll add a tiny workflow to the repo so there are runs to display.</div>
           <details class="sol">
             <summary><span class="tri">▸</span> Reveal solution <span class="lk">install + config</span></summary>
             <div class="sol-body">
               <p class="codecap">terminal — add the dependency to the frontend package</p>
 <pre>yarn --cwd packages/app add @backstage-community/plugin-github-actions</pre>
-              <p>With <code>app.packages: all</code>, discovery picks it up on the next start — no code change in <code>App.tsx</code>.</p>
-              <p class="codecap">app-config.yaml — let the backend talk to GitHub</p>
-<pre><span class="k">integrations:</span>
-  <span class="k">github:</span>
-    - <span class="k">host:</span> <span class="s">github.com</span>
-      <span class="k">token:</span> <span class="v">${GITHUB_TOKEN}</span>   <span class="c"># a PAT, supplied via env var — never hard-code</span></pre>
-              <p class="codecap">payments-api/catalog-info.yaml — point at the repo</p>
+              <p>With <code>app.packages: all</code>, feature discovery wires it in on the next start — no code change in the app.</p>
+              <p class="codecap">your repo — add a workflow so there's something to show</p>
+<pre><span class="c"># .github/workflows/ci.yml in your-org/demo-service</span>
+<span class="k">name:</span> <span class="s">ci</span>
+<span class="k">on:</span> [<span class="s">push</span>]
+<span class="k">jobs:</span>
+  <span class="k">build:</span>
+    <span class="k">runs-on:</span> <span class="s">ubuntu-latest</span>
+    <span class="k">steps:</span>
+      - <span class="k">run:</span> <span class="s">echo "hello from CI"</span></pre>
+              <p>Push it once so a run exists. The GitHub integration is already configured from Module 2 (<code>integrations.github.token: ${GITHUB_TOKEN}</code>), and the repo annotation is already on the component:</p>
+              <p class="codecap">catalog-info.yaml — the annotation that links to Actions</p>
 <pre><span class="k">metadata:</span>
   <span class="k">annotations:</span>
-    <span class="k">github.com/project-slug:</span> <span class="s">my-org/payments-api</span></pre>
-              <p>Export the token and restart:</p>
-<pre>export GITHUB_TOKEN=ghp_xxx
-yarn dev</pre>
-              <p>The component page now exposes a CI/CD view backed by GitHub Actions for that repo.</p>
+    <span class="k">github.com/project-slug:</span> <span class="s">your-org/demo-service</span></pre>
+              <p>Restart with the token exported, open <code>demo-service</code>, and the <strong>CI/CD</strong> view lists your GitHub Actions runs.</p>
               <div class="note"><span class="callkick">Enable / disable / tune — still just YAML</span> Every visual piece is an "extension" you can control under <code>app.extensions</code>. The schema:
 <pre><span class="k">app:</span>
   <span class="k">extensions:</span>
@@ -714,7 +685,7 @@ yarn dev</pre>
         <span class="k">disabled:</span> <span class="s">&lt;true|false&gt;</span>
         <span class="k">config:</span> <span class="s">&lt;plugin-specific&gt;</span>
     - <span class="s">&lt;extension-id&gt;: false</span>     <span class="c"># shorthand: turn one off</span></pre>
-              Extension IDs depend on what's installed — <b>discover them</b> from the plugin's README or by inspecting the running app rather than copying IDs blind. The point: showing, hiding, and configuring features is configuration, not code.</div>
+              Extension IDs depend on what's installed — <b>discover them</b> from the plugin's README or by inspecting the running app rather than copying IDs blind. Showing, hiding, and configuring features is configuration, not code.</div>
             </div>
           </details>
         </div>
@@ -723,44 +694,52 @@ yarn dev</pre>
       <div class="lab">
         <div class="rail"><span class="id">LAB-07b</span><span class="pin"></span></div>
         <div class="body">
-          <div class="lhead"><h3>Wire up the Kubernetes plugin</h3><span class="chip stretch">Stretch</span><span class="chip config">Config</span></div>
-          <div class="meta-line">⏱ 30 min · difficulty <span class="d">●●●</span></div>
-          <div class="obj"><b>Objective:</b> Surface live workloads on a service page by configuring the Kubernetes plugin against a cluster you control.</div>
-          <p>Kubernetes is a frontend + backend plugin. Install both halves, declare your cluster(s) in config, and annotate the component with a selector. This mirrors how you already register clusters with tooling.</p>
+          <div class="lhead"><h3>Wire up Jenkins (running locally in Docker)</h3><span class="chip stretch">Stretch</span><span class="chip config">Config</span></div>
+          <div class="meta-line">40 min · Hard</div>
+          <div class="obj"><b>Your task:</b> Run Jenkins locally in Docker, create a job, then install the Jenkins plugin so build history shows on the service page. One backend line, the rest config.</div>
+          <p>Jenkins is a frontend + backend plugin. You'll start Jenkins in a container (using the Docker Desktop from Module 1), make a job, and point the portal at it.</p>
           <details class="sol">
-            <summary><span class="tri">▸</span> Reveal solution <span class="lk">k8s wiring</span></summary>
+            <summary><span class="tri">▸</span> Reveal solution <span class="lk">jenkins + plugin</span></summary>
             <div class="sol-body">
-              <p class="codecap">terminal</p>
-<pre>yarn --cwd packages/app add @backstage/plugin-kubernetes
-yarn --cwd packages/backend add @backstage/plugin-kubernetes-backend</pre>
-              <p>The frontend half is auto-discovered. The backend half is one line in the backend index (you'll get comfortable with this pattern in Module 6):</p>
+              <p class="codecap">1 · run Jenkins in Docker</p>
+<pre><span class="c"># start Jenkins (LTS) with persistent storage</span>
+docker run -d --name jenkins -p 8080:8080 -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+
+<span class="c"># grab the first-run unlock password</span>
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword</pre>
+              <p>Open <a href="http://localhost:8080">localhost:8080</a>, paste the unlock password, install suggested plugins, create an admin user. Then create a simple <strong>Freestyle</strong> or <strong>Pipeline</strong> job named e.g. <code>demo-service</code> and run it once so a build exists.</p>
+              <p class="codecap">2 · create a Jenkins API token</p>
+<pre><span class="c"># In Jenkins UI: your user → Configure → API Token → Add new token → copy it</span>
+export JENKINS_USER=admin
+export JENKINS_TOKEN=11xxxxxxxxxxxxxxxx</pre>
+              <p class="codecap">3 · install the plugin (frontend + backend)</p>
+<pre>yarn --cwd packages/app add @backstage-community/plugin-jenkins
+yarn --cwd packages/backend add @backstage-community/plugin-jenkins-backend</pre>
+              <p>The frontend half is auto-discovered. The backend half is one line:</p>
               <p class="codecap">packages/backend/src/index.ts</p>
-<pre>backend.add(<span class="v">import</span>(<span class="s">'@backstage/plugin-kubernetes-backend'</span>));</pre>
-              <p class="codecap">app-config.yaml — declare clusters</p>
-<pre><span class="k">kubernetes:</span>
-  <span class="k">serviceLocatorMethod:</span>
-    <span class="k">type:</span> <span class="s">multiTenant</span>
-  <span class="k">clusterLocatorMethods:</span>
-    - <span class="k">type:</span> <span class="s">config</span>
-      <span class="k">clusters:</span>
-        - <span class="k">name:</span> <span class="s">prod</span>
-          <span class="k">url:</span> <span class="v">${K8S_API_URL}</span>
-          <span class="k">authProvider:</span> <span class="s">serviceAccount</span>
-          <span class="k">serviceAccountToken:</span> <span class="v">${K8S_SA_TOKEN}</span></pre>
-              <p class="codecap">component annotation — which workloads belong to this service</p>
+<pre>backend.add(<span class="v">import</span>(<span class="s">'@backstage-community/plugin-jenkins-backend'</span>));</pre>
+              <p class="codecap">app-config.local.yaml — point at your local Jenkins</p>
+<pre><span class="k">jenkins:</span>
+  <span class="k">baseUrl:</span> <span class="s">http://localhost:8080</span>
+  <span class="k">username:</span> <span class="v">${JENKINS_USER}</span>
+  <span class="k">apiKey:</span> <span class="v">${JENKINS_TOKEN}</span></pre>
+              <p class="codecap">catalog-info.yaml — link the component to its Jenkins job</p>
 <pre><span class="k">metadata:</span>
   <span class="k">annotations:</span>
-    <span class="k">backstage.io/kubernetes-id:</span> <span class="s">payments-api</span></pre>
-              <p>Label your Deployments/Pods with <code>backstage.io/kubernetes-id: payments-api</code> and the service page shows their live status. Everything portal-side is config — the only "code" was one backend import line.</p>
+    <span class="k">jenkins.io/job-full-name:</span> <span class="s">demo-service</span>   <span class="c"># folder/job path in Jenkins</span></pre>
+              <p>Restart with all three env vars exported. Open <code>demo-service</code> → the <strong>CI/CD</strong> area now shows Jenkins build history. Everything portal-side is config; the only code was one backend import line.</p>
+              <div class="note"><span class="callkick">Tip</span> Stop and remove the container with <code>docker rm -f jenkins</code>; your jobs persist in the <code>jenkins_home</code> volume for next time.</div>
             </div>
           </details>
         </div>
       </div>
+          <div class="built"><span class="ck">✓</span><span><b>You've built</b> a live CI/CD view on your service — GitHub Actions, and optionally Jenkins running locally in Docker — entirely through configuration.</span></div>
     </section>
 
     <!-- MODULE 6 -->
     <section class="module" id="m6">
-      <p class="mlabel">Module 6</p>
+      <div class="mhead"><span class="mlabel">Module 6 of 7</span><span class="ptrack"><span class="pfill" style="width:86%"></span></span></div>
       <h2>Light backend code</h2>
       <p>Eventually "configure it" runs out and you need to <em>add</em> capability. In the New Backend System that means working in one file — <code>packages/backend/src/index.ts</code> — which is a list of features:</p>
       <p class="codecap">packages/backend/src/index.ts (shape)</p>
@@ -778,16 +757,17 @@ backend.start();</pre>
         <div class="rail"><span class="id">LAB-08</span><span class="pin"></span></div>
         <div class="body">
           <div class="lhead"><h3>Register a backend module (one line)</h3><span class="chip code">Code</span></div>
-          <div class="meta-line">⏱ 15 min · difficulty <span class="d">●●</span>○</div>
-          <div class="obj"><b>Objective:</b> Give your Scaffolder the GitHub actions (<code>publish:github</code> etc.) so the real template flow from Module 4 works. This is the lightest possible code change: a dependency + a single import line.</div>
+          <div class="meta-line">15 min · Medium</div>
+          <div class="obj"><b>Your task:</b> Add Jenkins actions to your Scaffolder (<code>jenkins:job:create</code>, <code>jenkins:job:build</code>) so templates can create and trigger Jenkins jobs. This is the lightest possible code change: a dependency + a single import line.</div>
           <details class="sol">
             <summary><span class="tri">▸</span> Reveal solution <span class="lk">one line</span></summary>
             <div class="sol-body">
               <p class="codecap">terminal</p>
-<pre>yarn --cwd packages/backend add @backstage/plugin-scaffolder-backend-module-github</pre>
+<pre>yarn --cwd packages/backend add @backstage-community/plugin-scaffolder-backend-module-jenkins</pre>
               <p class="codecap">packages/backend/src/index.ts — add near the other backend.add calls</p>
-<pre>backend.add(<span class="v">import</span>(<span class="s">'@backstage/plugin-scaffolder-backend-module-github'</span>));</pre>
-              <p>Restart the backend. Visit <code>/create/actions</code> — the GitHub publish actions now appear, and templates that use <code>publish:github</code> will run. That's the whole change: you augmented the scaffolder <em>plugin</em> with a <em>module</em>, by adding it to the list.</p>
+<pre>backend.add(<span class="v">import</span>(<span class="s">'@backstage-community/plugin-scaffolder-backend-module-jenkins'</span>));</pre>
+              <p>Restart the backend and visit <code>/create/actions</code> — the <code>jenkins:job:*</code> actions now appear and can be used as steps in any template. That's the whole change: you augmented the scaffolder <em>plugin</em> with a <em>module</em> by adding it to the list.</p>
+              <div class="note"><span class="callkick">Same pattern, GitHub</span> <code>publish:github</code> (used in Module 4) comes from <code>@backstage/plugin-scaffolder-backend-module-github</code> the exact same way. The starter usually ships it; if <code>publish:github</code> was missing earlier, add it with one identical line.</div>
             </div>
           </details>
         </div>
@@ -797,8 +777,8 @@ backend.start();</pre>
         <div class="rail"><span class="id">LAB-09</span><span class="pin"></span></div>
         <div class="body">
           <div class="lhead"><h3>Write a tiny custom Scaffolder action</h3><span class="chip code">Code</span><span class="chip stretch">Stretch</span></div>
-          <div class="meta-line">⏱ 45 min · difficulty <span class="d">●●●</span></div>
-          <div class="obj"><b>Objective:</b> Create your own action, <code>acme:echo</code>, that takes a message and logs it, then call it from a template step. This is the smallest meaningful piece of "real" Backstage code — and the pattern scales to actions that hit your internal APIs.</div>
+          <div class="meta-line">45 min · Hard</div>
+          <div class="obj"><b>Your task:</b> Create your own action, <code>acme:recordRequest</code>, that records an infrastructure request (writes a request file and logs it), then call it from the Module 4 template. This is the smallest meaningful piece of "real" Backstage code — and the same pattern hits external systems later.</div>
           <p>Scaffold a module package with the CLI, then add an action and register it on the scaffolder's extension point. The CLI does the boilerplate:</p>
           <p class="codecap">terminal — generate the module package</p>
 <pre>yarn backstage-cli new
@@ -807,29 +787,45 @@ backend.start();</pre>
             <summary><span class="tri">▸</span> Reveal solution <span class="lk">action + module</span></summary>
             <div class="sol-body">
               <p>The CLI creates <code>plugins/scaffolder-backend-module-acme/</code>. Define the action:</p>
-              <p class="codecap">plugins/scaffolder-backend-module-acme/src/actions/echo.ts</p>
+              <p class="codecap">plugins/scaffolder-backend-module-acme/src/actions/recordRequest.ts</p>
 <pre><span class="v">import</span> { createTemplateAction } <span class="v">from</span> <span class="s">'@backstage/plugin-scaffolder-node'</span>;
 
-<span class="k">export const</span> createEchoAction = () =&gt;
-  createTemplateAction&lt;{ message: string }&gt;({
-    <span class="k">id:</span> <span class="s">'acme:echo'</span>,
+<span class="k">export const</span> createRecordRequestAction = () =&gt;
+  createTemplateAction&lt;{ name: string; cloud: string; environment: string }&gt;({
+    <span class="k">id:</span> <span class="s">'acme:recordRequest'</span>,
     <span class="k">schema:</span> {
       <span class="k">input:</span> {
         <span class="k">type:</span> <span class="s">'object'</span>,
-        <span class="k">required:</span> [<span class="s">'message'</span>],
-        <span class="k">properties:</span> { message: { type: <span class="s">'string'</span> } },
+        <span class="k">required:</span> [<span class="s">'name'</span>, <span class="s">'cloud'</span>, <span class="s">'environment'</span>],
+        <span class="k">properties:</span> {
+          name: { type: <span class="s">'string'</span> },
+          cloud: { type: <span class="s">'string'</span> },
+          environment: { type: <span class="s">'string'</span> },
+        },
       },
     },
     <span class="k">async handler</span>(ctx) {
-      ctx.logger.info(<span class="s">`Echo: </span><span class="v">${ctx.input.message}</span><span class="s">`</span>);
-      ctx.output(<span class="s">'echoed'</span>, ctx.input.message);
+      <span class="k">const</span> record = {
+        request: ctx.input.name,
+        cloud: ctx.input.cloud,
+        environment: ctx.input.environment,
+        requestedAt: <span class="k">new</span> Date().toISOString(),
+      };
+      ctx.logger.info(<span class="s">`Recording infra request: </span><span class="v">${JSON.stringify(record)}</span><span class="s">`</span>);
+      <span class="c">// write the record into the scaffolder workspace using Node fs</span>
+      <span class="k">const</span> fs = <span class="k">await</span> <span class="v">import</span>(<span class="s">'fs/promises'</span>);
+      <span class="k">await</span> fs.writeFile(
+        <span class="s">`</span><span class="v">${ctx.workspacePath}</span><span class="s">/request.json`</span>,
+        JSON.stringify(record, <span class="k">null</span>, 2),
+      );
+      ctx.output(<span class="s">'recorded'</span>, record.request);
     },
   });</pre>
               <p class="codecap">plugins/scaffolder-backend-module-acme/src/module.ts — register it</p>
 <pre><span class="v">import</span> { createBackendModule } <span class="v">from</span> <span class="s">'@backstage/backend-plugin-api'</span>;
 <span class="v">import</span> { scaffolderActionsExtensionPoint }
   <span class="v">from</span> <span class="s">'@backstage/plugin-scaffolder-node/alpha'</span>;
-<span class="v">import</span> { createEchoAction } <span class="v">from</span> <span class="s">'./actions/echo'</span>;
+<span class="v">import</span> { createRecordRequestAction } <span class="v">from</span> <span class="s">'./actions/recordRequest'</span>;
 
 <span class="k">export const</span> scaffolderModuleAcme = createBackendModule({
   <span class="k">pluginId:</span> <span class="s">'scaffolder'</span>,      <span class="c"># which plugin we augment</span>
@@ -838,41 +834,61 @@ backend.start();</pre>
     reg.registerInit({
       <span class="k">deps:</span> { scaffolder: scaffolderActionsExtensionPoint },
       <span class="k">async init</span>({ scaffolder }) {
-        scaffolder.addActions(createEchoAction());
+        scaffolder.addActions(createRecordRequestAction());
       },
     });
   },
 });</pre>
               <p class="codecap">packages/backend/src/index.ts — install your module</p>
 <pre>backend.add(<span class="v">import</span>(<span class="s">'@internal/plugin-scaffolder-backend-module-acme'</span>));</pre>
-              <p class="codecap">use it in a template step</p>
-<pre><span class="k">- id:</span> <span class="s">say</span>
-  <span class="k">action:</span> <span class="s">acme:echo</span>
+              <p class="codecap">use it as a step in the Module 4 template</p>
+<pre><span class="k">- id:</span> <span class="s">record</span>
+  <span class="k">action:</span> <span class="s">acme:recordRequest</span>
   <span class="k">input:</span>
-    <span class="k">message:</span> <span class="s">'hello from my first action'</span></pre>
-              <p>Restart, run a template using the step, and watch your message in the task log. The same <code>handler</code> could call an internal REST API, open a Jira ticket, or trigger a pipeline — that's how teams extend the golden path to their own systems.</p>
-              <div class="warn"><span class="callkick">Version note</span> Import paths for extension points (e.g. <code>/alpha</code> sub-paths) and the exact action-schema helpers shift between releases. If an import doesn't resolve, check the installed <code>@backstage/plugin-scaffolder-node</code> version and the current "Writing Custom Actions" doc rather than assuming this snippet is eternal. Also remember to use <b>camelCase</b> for action IDs in <code>id</code> references inside templates — dashes get read as minus signs in <code>${{ … }}</code> expressions.</div>
+    <span class="k">name:</span> <span class="v">${{ parameters.name }}</span>
+    <span class="k">cloud:</span> <span class="v">${{ parameters.cloud }}</span>
+    <span class="k">environment:</span> <span class="v">${{ parameters.environment }}</span></pre>
+              <p>Restart, run the template, and watch the request get recorded in the task log.</p>
+              <div class="real"><span class="callkick">Make it real — open a GitHub Issue</span> Instead of just writing a file, the handler can open a tracking ticket using the GitHub integration you already configured. Inside <code>handler</code>:
+<pre><span class="c">// uses the same GITHUB_TOKEN integration</span>
+<span class="k">const</span> res = <span class="k">await</span> fetch(
+  <span class="s">'https://api.github.com/repos/your-org/infra-requests/issues'</span>, {
+    <span class="k">method:</span> <span class="s">'POST'</span>,
+    <span class="k">headers:</span> {
+      Authorization: <span class="s">`token </span><span class="v">${process.env.GITHUB_TOKEN}</span><span class="s">`</span>,
+      Accept: <span class="s">'application/vnd.github+json'</span>,
+    },
+    <span class="k">body:</span> JSON.stringify({
+      title: <span class="s">`Infra request: </span><span class="v">${ctx.input.name}</span><span class="s">`</span>,
+      body: <span class="s">`cloud: </span><span class="v">${ctx.input.cloud}</span><span class="s">, env: </span><span class="v">${ctx.input.environment}</span><span class="s">`</span>,
+    }),
+  });
+ctx.logger.info(<span class="s">`Opened request issue (status </span><span class="v">${res.status}</span><span class="s">)`</span>);</pre>
+              Same shape works for any internal API — a ticketing system, an approval workflow, or a pipeline trigger.</div>
+              <div class="warn"><span class="callkick">Version note</span> Import paths for extension points (e.g. <code>/alpha</code> sub-paths) and helper names on <code>ctx</code> shift between releases. If an import or method doesn't resolve, check the installed <code>@backstage/plugin-scaffolder-node</code> version and the current "Writing Custom Actions" doc. Use <b>camelCase</b> action IDs (<code>acme:recordRequest</code>) — dashes get read as minus signs in <code>${{ … }}</code> expressions.</div>
             </div>
           </details>
         </div>
       </div>
+          <div class="built"><span class="ck">✓</span><span><b>You've built</b> your first backend change: a module registered in one line, and your own scaffolder action — so you can now extend the portal with code, not just config.</span></div>
     </section>
 
     <!-- MODULE 7 -->
     <section class="module" id="m7">
-      <p class="mlabel">Module 7</p>
-      <h2>Capstone</h2>
-      <p>No walkthrough this time — just an acceptance checklist. Combine everything into one coherent slice of a portal. Use a service that's real to your team.</p>
-      <div class="obj"><b>Deliverable:</b> A running portal where one service is fully wired end-to-end, plus a template that produces more services like it.</div>
-      <h3>Acceptance criteria</h3>
+      <div class="mhead"><span class="mlabel">Module 7 of 7</span><span class="ptrack"><span class="pfill" style="width:100%"></span></span></div>
+      <h2>Final Demo</h2>
+      <p>Put everything together: set up one service end to end and show it working. There's no single solution here — use the checklist below to confirm you've connected all the pieces.</p>
+      <div class="obj"><b>Goal:</b> A running portal where one GitHub-backed service is wired end to end, plus a working "Request infrastructure" template.</div>
+      <h3>Checklist</h3>
       <ul>
-        <li>A <code>Group</code> and at least one <code>User</code> exist, and a <code>Component</code> resolves its owner to that Group (Modules 2).</li>
-        <li>The Component has working <strong>TechDocs</strong> on its Docs tab (Module 3).</li>
-        <li>A <strong>Template</strong> registered under <code>/create</code> scaffolds a new Component of the same shape, with an <code>OwnerPicker</code> form field (Module 4).</li>
-        <li>At least one <strong>plugin</strong> (GitHub Actions or Kubernetes) shows live data on the Component page, configured entirely in <code>app-config.yaml</code> (Module 5).</li>
-        <li>At least one <strong>backend module</strong> is registered via <code>backend.add(import(...))</code> — the GitHub scaffolder module counts (Module 6).</li>
+        <li>A <code>Group</code> and at least one <code>User</code> exist, and your <code>demo-service</code> Component resolves its owner to that Group (Module 2).</li>
+        <li>The Component has working <strong>TechDocs</strong> on its Docs tab, rendered via Docker (Module 3).</li>
+        <li>The <strong>Request infrastructure</strong> template under <code>/create</code> generates a Terraform stub, opens a GitHub repo, and registers a new <code>Resource</code> (Module 4).</li>
+        <li>A plugin shows live CI/CD on the page — <strong>GitHub Actions</strong>, or <strong>Jenkins</strong> running locally in Docker (Module 5).</li>
+        <li>At least one <strong>backend module</strong> is registered via <code>backend.add(import(...))</code> — the Jenkins scaffolder module counts (Module 6).</li>
       </ul>
-      <div class="note"><span class="callkick">Stretch goal</span> Add your <code>acme:echo</code> action from LAB-09 as a final step in the capstone template, logging which team requested the new service. You'll have touched catalog, docs, templates, plugins, config, and code — the full surface of day-to-day Backstage work.</div>
+      <div class="note"><span class="callkick">Stretch goal</span> Add your <code>acme:recordRequest</code> action from LAB-09 as a final step in the template, so each request is logged (or opens a GitHub Issue). With that, you'll have touched catalog, docs, templates, plugins, config, and code — the full surface of day-to-day Backstage work.</div>
+          <div class="built"><span class="ck">✓</span><span><b>You've connected</b> catalog, docs, templates, plugins, configuration, and custom code into one working portal — the full surface of everyday Backstage work.</span></div>
     </section>
 
     <!-- APPENDIX -->
@@ -894,7 +910,7 @@ yarn backstage-cli versions:bump</pre>
         <tr><td>Owner shows as unresolved</td><td>The <code>Group</code>/<code>User</code> in <code>spec.owner</code> isn't in the catalog yet — register it.</td></tr>
         <tr><td>Installed a plugin, nothing appears</td><td>Confirm <code>app.packages: all</code> (feature discovery), and that you added the dep to <code>packages/app</code> (frontend) or <code>packages/backend</code> (backend) as appropriate.</td></tr>
         <tr><td>Template not in <code>/create</code></td><td>File location needs <code>rules: [{ allow: [Template] }]</code>.</td></tr>
-        <tr><td>Backend won't read GitHub/cloud creds</td><td>Values come from env vars referenced as <code>${VAR}</code> in <code>app-config</code>; make sure the var is exported in the shell running the backend.</td></tr>
+        <tr><td>Backend won't read GitHub/Jenkins creds</td><td>Values come from env vars referenced as <code>${VAR}</code> in <code>app-config</code>; make sure the var (e.g. <code>GITHUB_TOKEN</code>, <code>JENKINS_TOKEN</code>) is exported in the shell running the backend.</td></tr>
       </table>
 
       <h3>Glossary</h3>
